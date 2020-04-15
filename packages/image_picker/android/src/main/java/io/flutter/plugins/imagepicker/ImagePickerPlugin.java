@@ -218,11 +218,10 @@ public class ImagePickerPlugin
   private final ImagePickerDelegate constructDelegate(final Activity setupActivity) {
     final ImagePickerCache cache = new ImagePickerCache(setupActivity);
 
-    final File externalFilesDirectory =
-        setupActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+    final File cacheDir = setupActivity.getCacheDir();
     final ExifDataCopier exifDataCopier = new ExifDataCopier();
-    final ImageResizer imageResizer = new ImageResizer(externalFilesDirectory, exifDataCopier);
-    return new ImagePickerDelegate(setupActivity, externalFilesDirectory, imageResizer, cache);
+    final ImageResizer imageResizer = new ImageResizer(cacheDir, exifDataCopier);
+    return new ImagePickerDelegate(setupActivity, cacheDir, imageResizer, cache);
   }
 
   // MethodChannel.Result wrapper that responds on the platform thread.
